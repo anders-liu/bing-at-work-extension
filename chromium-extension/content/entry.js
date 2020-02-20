@@ -20,10 +20,26 @@ async function getRootAsync() {
     );
 }
 
+async function ajaxGetAsync(url) {
+    const response = await fetch(url, {
+        method: "GET",
+        credentials: "include"
+    });
+
+    if (response.ok) {
+        return response.json();
+    } else {
+        return undefined;
+    }
+}
+
 async function entryAsync() {
     try {
         const root = await getRootAsync();
         console.log(root);
+
+        const settings = await ajaxGetAsync("https://business.bing.com/api/v2/tenant/my/settings");
+        console.log(settings);
     } catch(ex) {
         console.log(ex);
     }
