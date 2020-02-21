@@ -12,7 +12,12 @@
       "48": "assets/icons/baw-48.png",
       "128": "assets/icons/baw-128.png"
     },
-    "permissions": ["activeTab", "storage", "tabs"],
+    "permissions": [
+        "https://*.bing.com/*",
+        "activeTab",
+        "storage",
+        "tabs"
+    ],
     "content_scripts": [{
         "matches": [
             "https://*.bing.com/search?*",
