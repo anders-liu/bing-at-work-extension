@@ -1,0 +1,33 @@
+{
+    "name": "bing-at-work-extension",
+    "displayName": "Bing At Work",
+    "version": "1.0.0",
+    "description": "Browser extension provides different experience of Bing At Work (Microsoft Search in Bing).",
+    "keywords": [
+        "Bing At Work",
+        "Microsoft Search"
+    ],
+    "homepage": "https://github.com/anders-liu/bing-at-work-extension",
+    "readme": "https://github.com/anders-liu/bing-at-work-extension",
+    "bugs": {
+        "url": "https://github.com/anders-liu/bing-at-work-extension/issues"
+    },
+    "license": "MIT",
+    "author": {
+        "name": "Anders Liu"
+    },
+    "scripts": {
+        "build-prod": "cross-env TS_NODE_PROJECT=\"build/webpack.tsconfig.json\" NODE_ENV=production webpack --config build/webpack.config.ts",
+        "build-dev": "cross-env TS_NODE_PROJECT=\"build/webpack.tsconfig.json\" NODE_ENV=development webpack --config build/webpack.config.ts"
+    },
+    "devDependencies": {
+        "@types/node": "^13.7.4",
+        "@types/webpack": "^4.41.6",
+        "cross-env": "^7.0.0",
+        "ts-node": "^8.6.2",
+        "tsconfig-paths": "^3.9.0",
+        "typescript": "^3.8.2",
+        "webpack": "^4.41.6",
+        "webpack-cli": "^3.3.11"
+    }
+}
