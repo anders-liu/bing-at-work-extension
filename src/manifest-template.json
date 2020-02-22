@@ -7,10 +7,10 @@
     "homepage_url": "__HOMEPAGE_URL__",
     "author": "__AUTHOR__",
     "icons": {
-      "16": "assets/icons/baw-16.png",
-      "32": "assets/icons/baw-32.png",
-      "48": "assets/icons/baw-48.png",
-      "128": "assets/icons/baw-128.png"
+      "16": "assets/manifest-icons/baw-16.png",
+      "32": "assets/manifest-icons/baw-32.png",
+      "48": "assets/manifest-icons/baw-48.png",
+      "128": "assets/manifest-icons/baw-128.png"
     },
     "permissions": [
         "https://*.bing.com/*",

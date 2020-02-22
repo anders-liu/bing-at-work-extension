@@ -30,6 +30,9 @@ const config: ConfigurationFactory = (_env, args) => {
             default: return value
         }
     };
+    const manifestIconSrc = resolve(srcDir, "assets/manifest-icons",
+        isProd ? "prod" : "dev");
+    const manifestIconDist = resolve(distDir, "assets/manifest-icons");
 
     return {
         entry: {
@@ -75,7 +78,7 @@ const config: ConfigurationFactory = (_env, args) => {
                 "manifest.json", manifestJson, transformManifestFields, 4
             ),
             new CopyPlugin([
-                { from: resolve(srcDir, "assets"), to: resolve(distDir, "assets") }
+                { from: manifestIconSrc, to: manifestIconDist }
             ])
         ]
     };
