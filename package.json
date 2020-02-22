@@ -1,8 +1,8 @@
 {
     "name": "bing-at-work-extension",
     "displayName": "Bing At Work",
-    "version": "1.0.0",
-    "description": "Browser extension provides different experience of Bing At Work (Microsoft Search in Bing).",
+    "version": "0.1.0",
+    "description": "A 3rd party user interface to Microsoft Search in Bing (MSB, also aka Bing at Work, Bing for Business).",
     "keywords": [
         "Bing At Work",
         "Microsoft Search"
@@ -21,12 +21,16 @@
         "build-dev": "cross-env TS_NODE_PROJECT=\"build/tsconfig.webpack.json\" webpack --config build/webpack.config.ts --mode development"
     },
     "devDependencies": {
+        "@types/copy-webpack-plugin": "^5.0.0",
+        "@types/generate-json-webpack-plugin": "^0.3.0",
         "@types/html-webpack-plugin": "^3.2.2",
         "@types/node": "^13.7.4",
         "@types/react": "^16.9.22",
         "@types/react-dom": "^16.9.5",
         "@types/webpack": "^4.41.6",
+        "copy-webpack-plugin": "^5.1.1",
         "cross-env": "^7.0.0",
+        "generate-json-webpack-plugin": "^0.3.1",
         "html-webpack-plugin": "^3.2.0",
         "ts-loader": "^6.2.1",
         "ts-node": "^8.6.2",
@@ -35,6 +39,7 @@
         "webpack-cli": "^3.3.11"
     },
     "dependencies": {
+        "@types/chrome": "0.0.96",
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
         "react-redux": "^7.2.0",

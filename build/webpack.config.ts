@@ -1,6 +1,8 @@
 import { resolve } from "path";
 import { ConfigurationFactory } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import GenerateJsonPlugin from "generate-json-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
 
 const config: ConfigurationFactory = (_env, args) => {
     const isProd = args.mode === "production";
@@ -14,6 +16,20 @@ const config: ConfigurationFactory = (_env, args) => {
     const tsConfigFile = isProd
         ? resolve(buildDir, "tsconfig.prod.json")
         : resolve(buildDir, "tsconfig.dev.json");
+
+    const packageJson = require(resolve(__dirname, "../package.json"));
+    const manifestJson = require(resolve(srcDir, "manifest-template.json"));
+    const transformManifestFields = (key: string, value: string) => {
+        const { version, description, homepage, author } = packageJson;
+        switch (value) {
+            case "__NAME__": return appTitle;
+            case "__VERSION__": return version;
+            case "__DESCRIPTION__": return description;
+            case "__HOMEPAGE_URL__": return homepage;
+            case "__AUTHOR__": return author.name;
+            default: return value
+        }
+    };
 
     return {
         entry: {
@@ -54,7 +70,13 @@ const config: ConfigurationFactory = (_env, args) => {
                     removeStyleLinkTypeAttributes: true,
                     useShortDoctype: true
                 } : undefined
-            })
+            }),
+            new GenerateJsonPlugin(
+                "manifest.json", manifestJson, transformManifestFields, 4
+            ),
+            new CopyPlugin([
+                { from: resolve(srcDir, "assets"), to: resolve(distDir, "assets") }
+            ])
         ]
     };
 };
