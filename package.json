@@ -23,13 +23,22 @@
     "devDependencies": {
         "@types/html-webpack-plugin": "^3.2.2",
         "@types/node": "^13.7.4",
+        "@types/react": "^16.9.22",
+        "@types/react-dom": "^16.9.5",
         "@types/webpack": "^4.41.6",
         "cross-env": "^7.0.0",
         "html-webpack-plugin": "^3.2.0",
+        "ts-loader": "^6.2.1",
         "ts-node": "^8.6.2",
         "tsconfig-paths": "^3.9.0",
         "typescript": "^3.8.2",
         "webpack": "^4.41.6",
         "webpack-cli": "^3.3.11"
+    },
+    "dependencies": {
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "react-redux": "^7.2.0",
+        "redux": "^4.0.5"
     }
 }
