@@ -1,9 +1,8 @@
 import React from "react";
+import { TabList } from "./tab-list";
 
 export const AppRoot: React.FunctionComponent = () => {
     return (
-        <>
-            <div id="app">hi there</div>
-        </>
+        <TabList />
     );
 }
