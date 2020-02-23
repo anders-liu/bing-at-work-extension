@@ -6,6 +6,7 @@ import { browserInteropMiddleware } from "./browser-interop-middleware";
 import { AppRoot } from "./components/app-root";
 import { tabsReducer } from "./store/tabs-reducer";
 import { AppState } from "./store/app-state";
+import "./styles/index.scss";
 
 const reducer = combineReducers<AppState>({
     tabs: tabsReducer

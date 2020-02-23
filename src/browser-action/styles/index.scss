@@ -1,0 +1,32 @@
+body {
+    font-family: Roboto, Helvetica, sans-serif;
+    font-size: 16px;
+    min-width: 200px;
+}
+
+.tab-list-item {
+    cursor: pointer;
+    padding: 8px;
+
+    &:not(:first-child) {
+        border-top: 1px solid #007ACC;
+    }
+
+    &:hover {
+        color: white;
+        background-color: #007ACC;
+
+        .tab-list-item-desc {
+            color: #C8C8C8;
+        }
+    }
+
+    .tab-list-item-title {
+        font-weight: bold;
+    }
+
+    .tab-list-item-desc {
+        margin-top: 4px;
+        color: #808080;
+    }
+}

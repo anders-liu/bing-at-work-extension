@@ -56,8 +56,8 @@ const TabListImpl: React.FunctionComponent<Props> = props => {
 
     return (
         <div>
-            <div>
-                <div onClick={createTab}>Create new tab</div>
+            <div className="tab-list-item">
+                <div className="tab-list-item-title" onClick={createTab}>Create new tab</div>
             </div>
             {tabItemsPart}
             {loadingPart}

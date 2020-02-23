@@ -14,9 +14,9 @@ export const TabItem: React.FunctionComponent<TabItemProps> = props => {
     }, [tab, onTabClick]);
 
     return (
-        <div role="botton" onClick={clickCallback}>
-            <div>{title}</div>
-            <div>{url}</div>
+        <div role="botton" className="tab-list-item" onClick={clickCallback}>
+            <div className="tab-list-item-title">{title}</div>
+            <div className="tab-list-item-desc">{url}</div>
         </div>
     );
 }
