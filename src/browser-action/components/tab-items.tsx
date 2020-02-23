@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import { BrowserTab } from "../store/data-modules";
 import { TabItem } from "./tab-item";
@@ -12,7 +13,9 @@ export const TabItems: React.FunctionComponent<Props> = props => {
 
     return (
         <>
-            {tabs.map(tab => <TabItem tab={tab} onTabClick={onTabClick} />)}
+            {_.map(tabs, (tab, i) => (
+                <TabItem key={i} tab={tab} onTabClick={onTabClick} />
+            ))}
         </>
     );
 }

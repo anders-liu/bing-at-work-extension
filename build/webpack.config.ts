@@ -59,6 +59,7 @@ const config: ConfigurationFactory = (_env, args) => {
             extensions: [".tsx", ".ts", ".js"]
         },
         devtool: isProd ? undefined : "inline-source-map",
+        watch: isProd ? false : true,
         plugins: [
             new HtmlWebpackPlugin({
                 filename: "popup.html",

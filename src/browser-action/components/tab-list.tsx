@@ -1,9 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { AppAction, createTabAction, switchToTabAction } from "../store/actions";
-import { BrowserTab } from "../store/data-modules";
+import {
+    AppAction,
+    createTabAction,
+    switchToTabAction,
+    loadTabsStartAction
+} from "../store/actions";
 import { AppState } from "../store/app-state";
+import { BrowserTab } from "../store/data-modules";
 import { getTabs, isTabsLoading } from "../store/selectors";
 import { TabItems } from "./tab-items";
 
@@ -20,12 +25,14 @@ function mapState(state: AppState): ConnectedProps {
 }
 
 type DispatchProps = {
+    loadTabs: () => void;
     createTab: () => void;
     switchToTab: (tab: BrowserTab) => void;
 }
 
 function mapDispatch(dispatch: Dispatch<AppAction>): DispatchProps {
     return {
+        loadTabs: () => dispatch(loadTabsStartAction()),
         createTab: () => dispatch(createTabAction()),
         switchToTab: (tab: BrowserTab) => dispatch(switchToTabAction(tab))
     };
@@ -34,7 +41,7 @@ function mapDispatch(dispatch: Dispatch<AppAction>): DispatchProps {
 type Props = ConnectedProps & DispatchProps;
 
 const TabListImpl: React.FunctionComponent<Props> = props => {
-    const { tabs, isTabsLoading, createTab, switchToTab } = props;
+    const { tabs, isTabsLoading, loadTabs, createTab, switchToTab } = props;
 
     const tabItemsPart = tabs && (
         <TabItems tabs={tabs} onTabClick={switchToTab} />
@@ -42,6 +49,10 @@ const TabListImpl: React.FunctionComponent<Props> = props => {
     const loadingPart = isTabsLoading && (
         <div>loading...</div>
     );
+
+    React.useEffect(() => {
+        loadTabs();
+    }, []);
 
     return (
         <div>
