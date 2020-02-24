@@ -1,7 +1,7 @@
 import { pollAsync } from "./async-utils";
 
 export async function waitElementAsync(id: string, timeout: number): Promise<HTMLElement | undefined> {
-    const action = () => {
+    const action = async () => {
         const result = document.getElementById(id);
         return { success: result != null, result };
     };

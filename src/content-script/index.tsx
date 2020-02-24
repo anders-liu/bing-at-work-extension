@@ -1,7 +1,13 @@
 import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { Store, combineReducers, createStore } from "redux";
 import { AppRoot } from "./components/app-root";
+import { bawApiMiddleware } from "./middlewares/baw-api-middleware";
+import { AppState } from "./store/app-state";
+import { AppAction } from "./store/actions";
+import { tenantSettingsReducer } from "./store/baw-api-reducers";
 import { waitElementAsync } from "./utils/dom-utils";
 
 async function initAsync(): Promise<void> {
@@ -9,7 +15,8 @@ async function initAsync(): Promise<void> {
         return;
     }
 
-    renderRoot();
+    const store = createAppStore();
+    renderRoot(store);
 }
 
 async function hasBingElementsAsync(): Promise<boolean> {
@@ -21,7 +28,15 @@ async function hasBingElementsAsync(): Promise<boolean> {
     return header != null && content != null;
 }
 
-function renderRoot(): void {
+function createAppStore(): Store<AppState, AppAction> {
+    const reducer = combineReducers<AppState>({
+        tenantSettings: tenantSettingsReducer
+    });
+    const store = createStore(reducer, bawApiMiddleware);
+    return store;
+}
+
+function renderRoot(store: Store<AppState, AppAction>): void {
     const rootElement = document.createElement("div");
     rootElement.id = "baw-ext-root";
 
@@ -31,7 +46,9 @@ function renderRoot(): void {
     );
 
     ReactDOM.render(
-        <AppRoot />,
+        <Provider store={store}>
+            <AppRoot />
+        </Provider>,
         rootElement
     );
 }

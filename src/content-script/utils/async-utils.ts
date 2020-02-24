@@ -20,7 +20,7 @@ const defaultPollOptions = {
 }
 
 export async function pollAsync<T>(
-    action: () => PollResult<T>,
+    action: () => Promise<PollResult<T>>,
     options?: PollOptions
 ): Promise<PollResult<T>> {
     const {
@@ -39,17 +39,17 @@ async function pollTimeoutAsync<T>(timeout: number): Promise<PollResult<T>> {
 }
 
 async function pollLoopAsync<T>(
-    action: () => PollResult<T>,
+    action: () => Promise<PollResult<T>>,
     retry: number,
     retryInterval: number
 ): Promise<PollResult<T>> {
-    let r: PollResult<T> = action();
+    let r: PollResult<T> = await action();
     let n = 0;
 
     while (!r.success && n < retry) {
         n++;
         await sleepAsync(retryInterval);
-        r = action();
+        r = await action();
     }
 
     return r;
