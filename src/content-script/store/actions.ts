@@ -1,5 +1,5 @@
 import { Action } from "redux";
-import { BawTenantSettings } from "./baw-api-modules";
+import { BawTenantSettings } from "../api-client/baw-api-models";
 
 export type ActionType
     = "TenantSettingsStart"

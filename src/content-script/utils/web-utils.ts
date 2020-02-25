@@ -5,11 +5,12 @@ export interface WebResult<T> {
     data?: T;
 }
 
-export async function webGetAsync<T>(url: string): Promise<WebResult<T>> {
+export async function webPostAsync<T>(url: string, requestBody?: any): Promise<WebResult<T>> {
     try {
         const response = await fetch(url, {
-            method: "GET",
-            credentials: "include"
+            method: "POST",
+            credentials: "include",
+            body: requestBody ? JSON.stringify(requestBody) : ""
         });
         const { ok, status: statusCode } = response;
 

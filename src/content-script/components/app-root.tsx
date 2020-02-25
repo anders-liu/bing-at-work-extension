@@ -19,7 +19,6 @@ const AppRootImpl: React.FunctionComponent<Props> = props => {
     const { loadTenantSettings } = props;
 
     React.useEffect(() => {
-        console.log(`===========Started!`);
         loadTenantSettings();
     }, []);
 

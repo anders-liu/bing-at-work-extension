@@ -1,4 +1,4 @@
-import { BawTenantSettings } from "./baw-api-modules";
+import { BawTenantSettings } from "../api-client/baw-api-models";
 
 export interface AppState {
     tenantSettings: TenantSettingsState;

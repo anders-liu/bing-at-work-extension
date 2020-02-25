@@ -4,7 +4,7 @@ import {
     tenantSettingsDoneAction,
     tenantSettingsFailedAction
 } from "../store/actions";
-import { bawFetchTenantSettingsAsync } from "../service-client/baw-service-client";
+import { bawFetchTenantSettingsAsync } from "../api-client/baw-api-client";
 
 async function tenantSettingsStartAsync(dispatch: Dispatch<AppAction>): Promise<void> {
     const result = await bawFetchTenantSettingsAsync();
