@@ -12,6 +12,52 @@ export function makeBawRequest<T extends BawRequestBase>(
 export interface BawTenantSettingsRequest extends BawRequestBase {
 }
 
+export interface BawTenantSettingsResponse {
+    tenantSettings: BawTenantSettings;
+}
+
+export interface BawSearchRequest extends BawRequestBase {
+    query: string;
+    clientContext: BawClientContext;
+    requestContext: BawRequestContext;
+}
+
+export function makeBawSearchRequest(
+    query: string, intent?: BawDomain
+): BawSearchRequest {
+    return makeBawRequest<BawSearchRequest>({
+        query,
+        clientContext: {
+            clientType: "Bing",
+            timeZoneOffsetInMinutes: -new Date().getTimezoneOffset()
+        },
+        requestContext: {
+            clientSize: "Large",
+            queryIntent: intent
+        }
+    });
+}
+
+export interface BawSearchResponse {
+    results?: BawResult[];
+}
+
+export type BawDomain
+    = "None"
+    | "Person"
+    | "Bookmark"
+    ;
+
+export interface BawClientContext {
+    clientType: "Bing";
+    timeZoneOffsetInMinutes: number;
+}
+
+export interface BawRequestContext {
+    clientSize: "Large",
+    queryIntent?: BawDomain;
+}
+
 export interface BawTenantSettings {
     tenantObjectId: string;
     tenantId: string;
@@ -21,6 +67,18 @@ export interface BawTenantSettings {
     theme: string;
 }
 
-export interface BawTenantSettingsResponse {
-    tenantSettings: BawTenantSettings;
+export interface BawResult {
+    domain: BawDomain;
+    id: string;
+}
+
+export interface BawPerson extends BawResult {
+    userPrincipalName: string;
+    fullName: string;
+    email: string;
+    alias: string;
+    department: string;
+    jobTitle: string;
+    officeLocation: string;
+    phoneNumbers: string[];
 }

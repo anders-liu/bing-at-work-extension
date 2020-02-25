@@ -7,7 +7,7 @@ import { AppRoot } from "./components/app-root";
 import { bawApiMiddleware } from "./middlewares/baw-api-middleware";
 import { AppState } from "./store/app-state";
 import { AppAction } from "./store/actions";
-import { tenantSettingsReducer } from "./store/baw-api-reducers";
+import { tenantSettingsReducer, meReducer } from "./store/baw-api-reducers";
 import { waitElementAsync } from "./utils/dom-utils";
 
 async function initAsync(): Promise<void> {
@@ -30,7 +30,8 @@ async function hasBingElementsAsync(): Promise<boolean> {
 
 function createAppStore(): Store<AppState, AppAction> {
     const reducer = combineReducers<AppState>({
-        tenantSettings: tenantSettingsReducer
+        tenantSettings: tenantSettingsReducer,
+        me: meReducer
     });
     const store = createStore(reducer, bawApiMiddleware);
     return store;

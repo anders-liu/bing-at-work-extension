@@ -1,10 +1,13 @@
 import { pollAsync } from "../utils/async-utils";
 import { webPostAsync } from "../utils/web-utils";
 import {
-    BawTenantSettings,
-    BawTenantSettingsResponse,
     makeBawRequest,
-    BawTenantSettingsRequest
+    BawTenantSettings,
+    BawTenantSettingsRequest,
+    BawTenantSettingsResponse,
+    BawPerson,
+    BawSearchResponse,
+    makeBawSearchRequest
 } from "./baw-api-models";
 
 export async function bawFetchTenantSettingsAsync(): Promise<BawTenantSettings | undefined> {
@@ -21,6 +24,19 @@ export async function bawFetchTenantSettingsAsync(): Promise<BawTenantSettings |
     });
     if (r.success) {
         return r.result!.tenantSettings;
+    } else {
+        return undefined;
+    }
+}
+
+export async function bawFetchMeAsync(): Promise<BawPerson | undefined> {
+    const r = await webPostAsync<BawSearchResponse>(
+        "https://business.bing.com/api/v3/search",
+        makeBawSearchRequest("me", "Person")
+    );
+    const bawResult = r.data && r.data.results && r.data.results[0];
+    if (r.ok && bawResult && bawResult.domain === "Person") {
+        return bawResult as BawPerson;
     } else {
         return undefined;
     }

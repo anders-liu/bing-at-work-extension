@@ -1,10 +1,13 @@
 import { Action } from "redux";
-import { BawTenantSettings } from "../api-client/baw-api-models";
+import { BawTenantSettings, BawPerson } from "../api-client/baw-api-models";
 
 export type ActionType
     = "TenantSettingsStart"
     | "TenantSettingsDone"
     | "TenantSettingsFailed"
+    | "MeStart"
+    | "MeDone"
+    | "MeFailed"
     ;
 
 export type AppAction = Action<ActionType>;
@@ -23,4 +26,20 @@ export function tenantSettingsDoneAction(tenantSettings: BawTenantSettings): Ten
 
 export function tenantSettingsFailedAction(): AppAction {
     return { type: "TenantSettingsFailed" };
+}
+
+export function meStartAction(): AppAction {
+    return { type: "MeStart" };
+}
+
+export interface MeDoneAction extends AppAction {
+    data: BawPerson;
+}
+
+export function meDoneAction(data: BawPerson): MeDoneAction {
+    return { type: "MeDone", data };
+}
+
+export function meFailedAction(): AppAction {
+    return { type: "MeFailed" };
 }
