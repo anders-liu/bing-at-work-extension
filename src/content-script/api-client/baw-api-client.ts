@@ -34,9 +34,12 @@ export async function bawFetchMeAsync(): Promise<BawPerson | undefined> {
         "https://business.bing.com/api/v3/search",
         makeBawSearchRequest("me", "Person")
     );
-    const bawResult = r.data && r.data.results && r.data.results[0];
-    if (r.ok && bawResult && bawResult.domain === "Person") {
-        return bawResult as BawPerson;
+    const domainResult = r.data && r.data.results && r.data.results[0];
+    if (r.ok && domainResult
+        && domainResult.domain === "Person"
+        && domainResult.results
+    ) {
+        return domainResult.results[0] as BawPerson;
     } else {
         return undefined;
     }

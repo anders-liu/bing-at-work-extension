@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { AppAction, tenantSettingsStartAction } from "../store/actions";
+import { AppContainer } from "./container/app-container";
 
 type DispatchProps = {
     loadTenantSettings: () => void;
@@ -23,9 +24,7 @@ const AppRootImpl: React.FunctionComponent<Props> = props => {
     }, []);
 
     return (
-        <>
-            <div>Hi there, BAW!</div>
-        </>
+        <AppContainer />
     );
 }
 

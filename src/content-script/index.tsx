@@ -10,6 +10,12 @@ import { AppAction } from "./store/actions";
 import { tenantSettingsReducer, meReducer } from "./store/baw-api-reducers";
 import { waitElementAsync } from "./utils/dom-utils";
 
+declare var window: Window & {
+    bawext: any;
+};
+
+window.bawext = window.bawext || {};
+
 async function initAsync(): Promise<void> {
     if (!await hasBingElementsAsync()) {
         return;
@@ -34,6 +40,7 @@ function createAppStore(): Store<AppState, AppAction> {
         me: meReducer
     });
     const store = createStore(reducer, bawApiMiddleware);
+    window.bawext.store = store;
     return store;
 }
 

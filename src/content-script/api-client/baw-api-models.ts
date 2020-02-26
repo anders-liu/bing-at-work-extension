@@ -39,7 +39,7 @@ export function makeBawSearchRequest(
 }
 
 export interface BawSearchResponse {
-    results?: BawResult[];
+    results?: BawDomainResult[];
 }
 
 export type BawDomain
@@ -65,6 +65,11 @@ export interface BawTenantSettings {
     iconLarge?: string;
     iconLargeChecksum?: string;
     theme: string;
+}
+
+export interface BawDomainResult {
+    domain: BawDomain;
+    results: BawResult[];
 }
 
 export interface BawResult {
