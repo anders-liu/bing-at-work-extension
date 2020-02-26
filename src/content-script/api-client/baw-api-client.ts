@@ -2,20 +2,20 @@ import { pollAsync } from "../utils/async-utils";
 import { webPostAsync } from "../utils/web-utils";
 import {
     makeBawRequest,
-    BawTenantSettings,
-    BawTenantSettingsRequest,
-    BawTenantSettingsResponse,
+    BawTenant,
+    BawTenantRequest,
+    BawTenantResponse,
     BawPerson,
     BawSearchResponse,
     makeBawSearchRequest
 } from "./baw-api-models";
 
-export async function bawFetchTenantSettingsAsync(): Promise<BawTenantSettings | undefined> {
+export async function bawFetchTenantAsync(): Promise<BawTenant | undefined> {
     // Poll few more times to make sure success or really can't fetch.
     const action = async () => {
-        const r = await webPostAsync<BawTenantSettingsResponse>(
+        const r = await webPostAsync<BawTenantResponse>(
             "https://business.bing.com/api/v2/tenant/my/settings",
-            makeBawRequest<BawTenantSettingsRequest>({})
+            makeBawRequest<BawTenantRequest>({})
         );
         return { success: r.ok, result: r.data };
     };

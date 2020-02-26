@@ -9,11 +9,11 @@ export function makeBawRequest<T extends BawRequestBase>(
     return Object.assign({ "$baw-ext": true }, request) as T;
 }
 
-export interface BawTenantSettingsRequest extends BawRequestBase {
+export interface BawTenantRequest extends BawRequestBase {
 }
 
-export interface BawTenantSettingsResponse {
-    tenantSettings: BawTenantSettings;
+export interface BawTenantResponse {
+    tenantSettings: BawTenant;
 }
 
 export interface BawSearchRequest extends BawRequestBase {
@@ -58,7 +58,7 @@ export interface BawRequestContext {
     queryIntent?: BawDomain;
 }
 
-export interface BawTenantSettings {
+export interface BawTenant {
     tenantObjectId: string;
     tenantId: string;
     tenantDisplayName: string;

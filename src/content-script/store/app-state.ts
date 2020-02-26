@@ -1,11 +1,11 @@
-import { BawTenantSettings, BawPerson } from "../api-client/baw-api-models";
+import { BawTenant, BawPerson } from "../api-client/baw-api-models";
 
 export interface AppState {
-    tenantSettings: TenantSettingsState;
+    tenant: TenantState;
     me: MeState;
 }
 
-export type TenantSettingsState = AsyncData<BawTenantSettings>;
+export type TenantState = AsyncData<BawTenant>;
 export type MeState = AsyncData<BawPerson>;
 
 export type AsyndState

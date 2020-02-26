@@ -1,24 +1,24 @@
 import { applyMiddleware, Dispatch, MiddlewareAPI } from "redux";
 import {
     AppAction,
-    tenantSettingsDoneAction,
-    tenantSettingsFailedAction,
+    tenantDoneAction,
+    tenantFailedAction,
     meStartAction,
     meDoneAction,
     meFailedAction
 } from "../store/actions";
 import {
-    bawFetchTenantSettingsAsync,
+    bawFetchTenantAsync,
     bawFetchMeAsync
 } from "../api-client/baw-api-client";
 
-async function tenantSettingsStartAsync(dispatch: Dispatch<AppAction>): Promise<void> {
-    const result = await bawFetchTenantSettingsAsync();
+async function tenantStartAsync(dispatch: Dispatch<AppAction>): Promise<void> {
+    const result = await bawFetchTenantAsync();
     if (result) {
-        dispatch(tenantSettingsDoneAction(result));
+        dispatch(tenantDoneAction(result));
         dispatch(meStartAction());
     } else {
-        dispatch(tenantSettingsFailedAction());
+        dispatch(tenantFailedAction());
     }
 }
 
@@ -35,7 +35,7 @@ const enhancer = (store: MiddlewareAPI<Dispatch<AppAction>>) =>
     (next: Dispatch<AppAction>) => (action: AppAction) => {
         const result = next(action);
         switch (action.type) {
-            case "TenantSettingsStart": tenantSettingsStartAsync(store.dispatch); break;
+            case "TenantStart": tenantStartAsync(store.dispatch); break;
             case "MeStart": meStartAsync(store.dispatch); break;
         }
         return result;

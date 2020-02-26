@@ -1,24 +1,24 @@
 import {
     AppAction,
-    TenantSettingsDoneAction,
+    TenantDoneAction,
     MeDoneAction
 } from "./actions";
 import {
-    TenantSettingsState,
+    TenantState,
     MeState,
     defaultAsyncData
 } from "./app-state";
 
-export function tenantSettingsReducer(
-    state: TenantSettingsState | undefined, action: AppAction
-): TenantSettingsState {
+export function tenantReducer(
+    state: TenantState | undefined, action: AppAction
+): TenantState {
     switch (action.type) {
-        case "TenantSettingsStart": return { state: "Loading" };
-        case "TenantSettingsDone": {
-            const { tenantSettings: data } = action as TenantSettingsDoneAction;
+        case "TenantStart": return { state: "Loading" };
+        case "TenantDone": {
+            const { tenant: data } = action as TenantDoneAction;
             return { state: "Done", data };
         }
-        case "TenantSettingsFailed": {
+        case "TenantFailed": {
             return { state: "Failed" };
         }
         default: return state || defaultAsyncData();
